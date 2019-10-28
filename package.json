@@ -1,0 +1,80 @@
+{
+  "name": "buildingblocks",
+  "productName": "buildingblocks",
+  "version": "2.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint src --color",
+    "dist": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "zhangaobo@hexindai.com",
+    "productName": "buildingblocks",
+    "win": {
+      "icon": "./icons/logo.ico"
+    }
+  },
+  "keywords": [],
+  "author": "zhangaobo@hexindai.com",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn",
+        "icon": "./icons/logo.icns"
+      },
+      "electronWinstallerConfig": {
+        "name": "buildingblocks"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "buildingblocks"
+      }
+    }
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.3",
+    "electron-debug": "^1.5.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "mousetrap": "^1.6.3"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.2",
+    "electron-prebuilt-compile": "2.0.4",
+    "eslint": "^3",
+    "eslint-config-airbnb": "^15",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-react": "^7",
+    "electron-debug": "^1.5.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-packager": "^9.1.0"
+  }
+}

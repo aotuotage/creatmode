@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>h5页面修改</title>
+    <script src="./jquery.min.js"></script>
+    <script src="./default.js"></script>
+    <link rel="stylesheet" href="./index.css"/>
+</head>
+<body>
+    <section class="content_left">
+        <iframe id="h5view" width="100%" height="1500" src="">
+        </iframe>
+    </section>
+    <section class="content_right">
+        <h3 class="right_title">html及js编辑区<span class="stateone"></span></h3>
+        <div id="editor"></div>
+        <h3 class="right_title">css编辑区<span class="stateone"></span></h3>
+        <div id="editor2"></div>
+    </section>
+     <!-- 高亮及代码补全插件 -->
+    <script src='./tmp/ace.js'></script>
+    <script src="./tmp/ext-language_tools.js"></script>
+    <script>
+        var fs = require("fs");
+        const path = require("path");
+        /*代码高亮及提示部分*/
+        ace.require("ace/ext/language_tools");
+        //html编辑器
+        var onecontent = null;
+        var onechange = 0;
+        var editor = ace.edit("editor");
+        editor.setOptions({
+            enableLiveAutocompletion: true,//只能补全
+        });
+        editor.setTheme("ace/theme/monokai");//monokai模式是自动显示补全提示
+        editor.getSession().setMode("ace/mode/html");
+        editor.setFontSize(14);
+        editor.getSession().on('change', function(e) {  
+            onechange++;
+            if(onechange >1){
+                onecontent = editor.getValue();
+                $(".stateone").html("（编辑中）")
+            }
+        });
+        //css编辑器
+        var twocontent = null;
+        var twochange = 0;
+        var editor2 = ace.edit("editor2");
+        editor2.setOptions({
+            enableLiveAutocompletion: true,//只能补全
+        });
+        editor2.setTheme("ace/theme/monokai");//monokai模式是自动显示补全提示
+        editor2.getSession().setMode("ace/mode/css");//语言
+        editor2.setFontSize(14);
+        editor2.getSession().on('change', function(e) {  
+            twochange++;
+            if(twochange >1){
+                twocontent = editor2.getValue();
+            }
+        });
+        /* ====================页面刷新加载部分=================== */
+        //获取url参数
+        function GetQueryString(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+        var targepage = GetQueryString('page');
+        $("#h5view").attr("src","https://member.hexindai.com/promotion/"+targepage);
+        var projectTarget,showhtml,showcss;//读取目标文件目录
+        projectTarget = JSON.parse(fs.readFileSync(`${__dirname}/target.json`)).target;
+        //html读取
+        fs.readFile(`${projectTarget}/frontend/resources/views/mp/${targepage}_mobile.blade.php`, function(err,data) {
+            if (err) {
+                return console.log(err);
+            }
+            if(data.toString() == ''){
+                alert('文件为空')
+            }else{
+                showhtml= data.toString();
+                editor.setValue(showhtml);
+            }
+        });
+        //css读取
+        fs.readFile(`${projectTarget}/src/mp.css/${targepage}.css`, function(err,data) {
+            if (err) {
+                return console.log(err);
+            }
+            if(data.toString() == ''){
+                alert('文件为空')
+            }else{
+                showcss= data.toString();
+                editor2.setValue(showcss);
+            }
+        });
+        /* =====================注册键盘事件及保存文件更改=================*/
+        const Mousetrap = require('mousetrap');
+        Mousetrap.bind('command+shift+k', () => {
+            console.log('command shift k');
+        });
+        Mousetrap.bind(['command+s', 'ctrl+s'], () => {
+            if(onecontent !== null){
+                fs.writeFile(`${projectTarget}/frontend/resources/views/mp/${targepage}_mobile.blade.php`, onecontent, function(err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                });
+                $(".stateone").html("（已保存）")
+                console.log("保存成功");
+                $("#h5view").attr("src","https://member.hexindai.com/promotion/"+targepage);
+            }else{
+                $(".stateone").html("（文档未编辑）")
+                console.log("保存失败");
+            }
+            if(twocontent !== null){
+                fs.writeFile(`${projectTarget}/src/mp.css/${targepage}.css`, twocontent, function(err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                });
+                console.log("保存成功");
+            }else{
+                $(".stateone").html("（文档未编辑）")
+                console.log("保存失败");
+            }
+            return false;
+        }); 
+    </script>
+</body>
+</html>

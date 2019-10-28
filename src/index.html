@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>积木页面生成</title>
+    <script src="./jquery.min.js"></script>
+    <link rel="stylesheet" href="./index.css"/>
+</head>
+<body>
+    <!-- 页面创建区 -->
+    <div class="creat">
+        <div class="navport">
+            <p class="pcclick active">pc专题</p>
+            <p class="h5click">h5专题</p>
+        </div>
+        <div class="pcdiv">
+            <h3>pc新建专题</h3>
+            <div class="input_content">
+                <label>专题名称：</label>
+                <input type="text" class="input_text" value="">
+            </div>
+            <button type="button" class="creat_special">确认</button>
+            <!-- <div class="open_page pc_editor">编辑历史页面</div> -->
+        </div>
+        <div class="h5div">
+            <h3>h5新建专题</h3>
+            <div class="input_content">
+                <label>专题名称：</label>
+                <input type="text" class="input_text_h5 " value="">
+            </div>
+            <button type="button" class="creat_special_h5">确认</button>
+            <div class="open_page h5_editor">编辑历史页面</div>
+        </div>
+    </div>
+    <!-- 历史页面展示区 -->
+    <div class="history">
+        <div class="history_list"></div>
+        <div class="history_close">
+            关闭
+        </div>
+    </div>
+    <!-- h5页面创建区域 -->
+    <div class="h5_content">
+        <!-- 图片及分享设置区 -->
+        <div class="img_change">
+            <p class="img_notes">*请先将切图拷贝到目录再修改</p>
+            <p class="img_title">批量修改图片名</p>
+            <input type="text" class="input_img" placeholder="图片名称"> <br>
+            <button class="img_btn chang_btn" type="button">点击修改</button>
+            <div class="division"></div>
+            <p class="img_title">微信分享设置</p>
+            <input type="text" class="wxtitle input_default" placeholder="分享标题" value=""> <br>
+            <input type="text" class="wxcontent input_default" placeholder="分享内容" value=""> <br>
+            <input type="text" class="wxurl input_default" placeholder="分享链接" value=""> <br>
+            <button class="img_btn wx_sure" type="button">确认</button>
+            <div class="division"></div>
+            <p class="img_title">唤起app分享设置</p><br>
+            <div class="addshare">
+                    +
+            </div>
+            <div class="appsharediv" style="display: none">
+                <input type="text" class="app_title input_default" placeholder="分享标题"> <br>
+                <input type="text" class="app_content input_default" placeholder="分享内容"> <br>
+                <input type="text" class="app_url input_default" placeholder="分享链接"> <br>
+                <button class="img_btn app_sure" type="button">确认</button>
+            </div>
+        </div>
+        <!-- 页面主体div添加区 -->
+        <h3 class="content_title">页面主体区域</h3>
+        <div class="content_line"></div>
+        <div class="pc_incontent">
+            <form action="" class="form_btn" id="h5_submit">
+                <p class="pc_title">title设置</p>
+                <label>title：</label>
+                <input type="text" name="input_title" class="input_title" value=""> <br>
+                <label>keywords：</label>
+                <input type="text" name="input_key" class="input_key" value=""> <br>
+                <label>背景颜色：</label>
+                <input type="text" name="input_bgcolor" class="input_bgcolor" value=""> <br>
+                <p class="banner_p" style="margin-top: 20px">banner设置</p>
+                <label>height:</label>
+                <input type="text" name="banner_height" class="banner_height" value=""> <br>
+                <label>图片名：</label>
+                <input type="text" name="banner_name" class="banner_name" value=""><br>
+                <div class="creatdiv">
+                    <p class="creatdiv_title">div设置</p>
+                    <label>div1：</label>
+                    <input type="text" name="div1_width" placeholder="div宽度" value=""><br>
+                    <input type="text" name="div1_height" placeholder="div高度" value=""><br>
+                    <input type="text" name="div1_bgimg" placeholder="div背景图片" value=""><br>
+                    <input type="text" name="div_num" value="" id="div_num" style="display: none">
+                    <div class="divadd">
+                            +
+                    </div>
+                </div>
+                <div class="alert_div">
+                    <p>弹窗设置</p>
+                    <label>alert1：</label>
+                    <input type="text" name="alert1_width" placeholder="alert宽度" value=""><br>
+                    <input type="text" name="alert1_height" placeholder="alert高度" value=""><br>
+                    <input type="text" name="alert1_bgimg" placeholder="alert背景图片" value=""><br>
+                    <input type="text" name="alert_num" value="" id="alert_num" style="display: none">
+                    <div class="alertadd">
+                        +
+                    </div>
+                </div>
+                <button class="formBody_btn banner_sub" type="submit">确认生成</button>
+            </form>
+        </div>
+        <div class="fictitious_tree">
+        </div>
+    </div>
+    <!-- pc页面创建区域 -->
+    <div class="pc_content">
+        <!-- 图片及分享设置区 -->
+        <div class="img_change" style="padding-bottom:60px">
+            <p class="img_notes">*请先将切图拷贝到目录再修改</p>
+            <p class="img_title">批量修改图片名</p>
+            <input type="text" class="input_img_pc" placeholder="图片名称"> <br>
+            <button class="img_btn chang_btn_pc" type="button">点击修改</button>
+        </div>
+        <!-- 页面主体div添加区 -->
+        <h3 class="content_title">页面主体区域</h3>
+        <div class="content_line"></div>
+        <div class="pc_incontent">
+            <form action="" class="form_btn" id="pc_submit">
+                <p class="pc_title">title设置</p>
+                <label>title：</label>
+                <input type="text" name="input_title" class="input_title_pc" value=""> <br>
+                <label>keywords：</label>
+                <input type="text" name="input_key" class="input_key_pc" value=""> <br>
+                <label>背景颜色：</label>
+                <input type="text" name="input_bgcolor" class="input_bgcolor_pc" value=""> <br>
+                <p class="banner_p" style="margin-top: 20px">banner设置</p>
+                <label>height:</label>
+                <input type="text" name="banner_height" class="banner_height_pc" value=""> <br>
+                <label>图片名：</label>
+                <input type="text" name="banner_name" class="banner_name_pc" value=""><br>
+                <div class="creatdiv">
+                    <p class="creatdiv_title">div设置</p>
+                    <label>div1：</label>
+                    <input type="text" name="div1_width" placeholder="div宽度" value=""><br>
+                    <input type="text" name="div1_height" placeholder="div高度" value=""><br>
+                    <input type="text" name="div1_bgimg" placeholder="div背景图片" value=""><br>
+                    <input type="text" name="div_num" value="" id="div_num_pc" style="display: none">
+                    <div class="divadd">
+                            +
+                    </div>
+                </div>
+                <div class="alert_div">
+                    <p>弹窗设置</p>
+                    <label>alert1：</label>
+                    <input type="text" name="alert1_width" placeholder="alert宽度" value=""><br>
+                    <input type="text" name="alert1_height" placeholder="alert高度" value=""><br>
+                    <input type="text" name="alert1_bgimg" placeholder="alert背景图片" value=""><br>
+                    <input type="text" name="alert_num" value="" id="alert_num_pc" style="display: none">
+                    <div class="alertadd">
+                        +
+                    </div>
+                </div>
+                <button class="formBody_btn banner_sub" type="submit">确认生成</button>
+            </form>
+        </div>
+        <div class="fictitious_tree_pc">
+        </div>
+    </div>
+    <!-- 首次项目目标设置区 -->
+    <div class="dark_alert" style="display: block"></div>
+    <div class="project_target" style="display: none"> 
+        <p>请设置项目路径，如：/Users/mac/desktop/hexindai_php</p>
+        <input type="text" name="target" value="" class="target_name">
+        <button type="button" class="target_btn">提交</button>
+    </div>
+</body>
+
+<script type="text/javascript">
+    /* =============================测试用状态=================== */
+    // $(".project_target").hide();
+    // $(".creat").hide();
+    // $(".dark_alert").hide();
+    /* ====================================================h5部分=================================================== */
+    /*=====================依赖模块及全局变量==================*/
+    var fs = require("fs");
+    const path = require("path");
+    const electron = require("electron");
+    var buf = new Buffer.alloc(1024);
+    var BrowserWindow = electron.remote.BrowserWindow;
+    var htmlTarget,cssTarget,reqtext,reqtexth5,h5page;
+    // const Store = require('electron-store');
+    // const store = new Store();
+    //h5图片目录
+    var h5imgpath;
+    /*=====================页面交互逻辑==================*/
+    //打开h5历史页面
+    $(".h5_editor").click(function(){
+        $(".history").show();
+        fs.readFile(`${__dirname}/target.json`, function(err,data) {
+            if (err) {
+                return console.log(err);
+            }
+            var targetdata = jQuery.parseJSON(data.toString());
+            $(".history_list").html("");
+            for(i=0; i<targetdata.h5page.length; i++) {
+                $(".history_list").append("<p>"+targetdata.h5page[i]+"</p>")
+            }
+        });
+    });
+    $(".history_list").click(function(e){
+        var innertext = e.target.innerHTML;
+        var h5Window = null;
+        h5Window = new BrowserWindow ({show: true})
+        h5Window.maximize()
+        h5Window.webContents.openDevTools();
+        h5Window.loadURL(`file://${__dirname}/h5view.html?page=${innertext}`);
+        h5Window.on("close", function(){
+            h5Window = null;
+        })
+    })
+    $(".history_close").click(function() {
+        $(".history").hide();
+    });
+    //添加APP分享表单
+    $(".addshare").click(function(){
+        $(".appsharediv").show()
+    })
+    //是否设置目标操作地址
+    var projectTarget;
+    fs.readFile(`${__dirname}/target.json`, function(err,data) {
+        if (err) {
+            return console.log(err);
+        }
+        if(jQuery.parseJSON(data.toString()).target == ''){
+            $(".project_target").show();
+            $(".creat").hide();
+        }else{
+            projectTarget = jQuery.parseJSON(data.toString()).target;
+        }
+    });
+    //首次进去设置项目地址
+    $(".target_btn").click(function(){
+        var target_name= $(".target_name").val();
+        if(target_name == ''){
+            alert("项目地址不能为空");
+            return false;
+        }
+        fs.readFile(`${__dirname}/target.json`,function(err,data){
+            if(err){
+                return console.error(err);
+            }
+            var thisdata = data.toString();
+            thisdata = JSON.parse(thisdata);
+            thisdata.target = target_name;
+            var thisstr = JSON.stringify(thisdata);
+            fs.writeFile(`${__dirname}/target.json`,thisstr,function(err){
+                if(err){
+                    console.log(err);
+                    return false;
+                }else{
+                    projectTarget = target_name;
+                    $(".project_target").hide();
+                    $(".creat").show();
+                    console.log('录入项目目录成功');
+                }
+            })
+        })
+    });
+    //新建h5按钮
+    $(".creat_special_h5").click(function() {
+        $(".h5_content").show();
+        $(".pc_content").hide();
+        h5page = $(".input_text_h5 ").val();
+        //新增页面存入json
+        fs.readFile(`${__dirname}/target.json`,function(err,data){
+            if(err){
+                return console.error(err);
+            }
+            var person = data.toString();
+            person = JSON.parse(person);
+            person.h5page.push(h5page);
+            var str = JSON.stringify(person);
+            fs.writeFile(`${__dirname}/target.json`,str,function(err){
+                if(err){
+                    console.error(err);
+                }
+                console.log('新增页面成功');
+            })
+        })
+        if(h5page == ''){
+            alert("不能为空");
+        }else{
+$(".fictitious_tree").append(`<div class='${h5page}'>
+        <div class='banner'></div>
+        <div class="establish1"></div>
+        <div class="alert_dark">
+            <div class="alert1"></div>
+        </div>
+    </div>`);
+            createh5(h5page);
+        }
+    })
+    //图片重命名按钮
+    $(".chang_btn").click(function() {
+        var imgname = $(".input_img").val();
+        if(imgname == ''){
+            alert("不能为空");
+        }else{
+            renameImg(imgname);
+        }
+    })
+    //微信分享按钮
+    $(".wx_sure").click(function() {
+        var wxcontent={};
+        wxcontent.wxtitle = $(".wxtitle").val();
+        wxcontent.wxcontent = $(".wxcontent").val();
+        wxcontent.wxurl = $(".wxurl").val();
+        if(wxcontent.wxtitle == '' || wxcontent.wxcontent == '' || wxcontent.wxurl == ''){
+            alert("不能为空");
+        }else{
+            wxShare(wxcontent);
+        }
+    })
+    //APP分享按钮
+    $(".app_sure").click(function(){
+        var appcontent={};
+        appcontent.apptitle = $(".app_title").val();
+        appcontent.appcontent = $(".app_content").val();
+        appcontent.appurl = $(".app_url").val();
+        if(appcontent.apptitle == '' || appcontent.appcontent == '' || appcontent.appurl == ''){
+            alert("不能为空");
+        }else{
+            appShare(appcontent);
+        }
+    })
+    //插入banner、div、alert
+    $("#h5_submit").on('submit', function(){
+        var title = $(".input_title").val();
+        var key = $(".input_key").val();
+        var color = $(".input_bgcolor").val();
+        var height = $(".banner_height").val()
+        var name = $(".banner_name").val();
+        var $form = $("#h5_submit").serialize();
+        let div_html = ``;
+        div_html = $(".fictitious_tree").html().toString();
+        $form+= "&div_html="+div_html;
+        var operationcontent = "&"+$form;
+        if(title !=="" && key !=="" && color !=="" && height !== "" && name !==""){
+            operationH5(operationcontent);
+        }else {
+            alert("字段不能为空");
+        }
+        return false;
+    })
+    /* ======================================h5页面创建函数===================================== */
+    function createh5(h5target) {
+        //读取输入文件名
+        reqtexth5 = h5target;
+        //html模板文件名
+        let htmlurl = `${__dirname}/tmp/inputh5.html`;
+        //css模板名
+        let cssurl = `${__dirname}/tmp/input.css`;
+        //html模板文件内容
+        let htmltext;
+        //html模板文件内容
+        let csstext;
+        //生成html文件名
+        htmlTarget = projectTarget+"/frontend/resources/views/mp/"+reqtexth5+"_mobile.blade.php";
+        //生成css文件名
+        cssTarget = projectTarget+"/src/mp.css/"+reqtexth5+".css";
+        //img文件目录
+        let imgTarget = projectTarget+"/src/mp.img";
+        //html读写
+        fs.open(htmlurl, 'r+', function(err,fd) {
+            if (err) {
+                return console.log(err);
+            }
+            //读取模板文件及创建html文件
+            fs.readFile(htmlurl, function (err, data) {
+                if (err) {
+                    return console.log(err);
+                }
+                htmltext = data.toString();
+                fs.writeFile(htmlTarget,htmltext,function(error){
+                    if(error){
+                        console.log(error);
+                        return false;
+                    }
+                    console.log('写入html成功');
+                });
+            });
+            fs.close(fd, function(err){
+                if (err){
+                    console.log(err);
+                }
+                console.log("html文件关闭成功");
+            });
+        });
+        //css读写
+        fs.open(cssurl, 'r+', function(err,fd) {
+            if (err) {
+                return console.log(err);
+            }
+            //读取模板文件及创建css文件
+            fs.readFile(cssurl, function (err, data) {
+                if (err) {
+                    return console.log(err);
+                }
+                csstext = data.toString();
+                fs.writeFile(cssTarget,csstext,function(error){
+                    if(error){
+                        console.log(error);
+                        return false;
+                    }
+                    console.log('写入css成功');
+                });
+            });
+            fs.close(fd, function(err){
+                if (err){
+                    console.log(err);
+                }
+                console.log("css文件关闭成功");
+            });
+        });
+        //创建img文件
+        fs.mkdir(imgTarget+"/"+reqtexth5,function(err){
+            if (err) {
+                return console.log(err);
+            }
+            h5imgpath = imgTarget+"/"+reqtexth5;
+            console.log("img目录创建成功。");
+        });
+        $(".project_target").hide();
+        $(".creat").hide();
+        $(".dark_alert").hide();
+    }
+    /* ======================================h5图片重命名函数===================================== */
+    function renameImg(imgname){
+        //读取输入文件名
+        let reqtextimg = imgname;
+        fs.readdir(h5imgpath, function(err, files) {
+            if(files.length === 0){
+                console.log("重命名失败")
+            }else {
+                files.forEach(function(filename,index) {
+                    //运用正则表达式替换oldPath中不想要的部分
+                    let oldPath = h5imgpath + '/' + filename,
+                        newPath = h5imgpath + '/' + filename.replace(/.+(?=\.jpg)|.+(?=\.png)/g, reqtextimg+index);
+                    fs.rename(oldPath, newPath, function(err) {
+                        if (!err) {
+                            console.log(filename + '替换成功!')
+                        }
+                    })
+                });
+            }
+        });
+        alert("重命名成功");
+    }
+    /* ======================================h5微信分享设置函数===================================== */
+    function wxShare(wxcontent){
+        var htmltext;
+        //仓库文件操作
+        fs.readFile(htmlTarget, function (err, data) {
+            if (err) {
+                return console.error(err);
+            }
+            htmltext = data.toString();
+            var wx_content = `$(function(){
+            //分享
+            sharefn({
+                url:${wxcontent.wxurl},
+                title:${wxcontent.wxtitle},
+                content:${wxcontent.wxcontent},
+                sharesuccess:function () {
+                    console.log("分享成功");
+                },
+                sharecancel:function () {
+                    console.log("取消分享");
+                }
+            })`
+            //匹配函数
+            let newhtml = htmltext.replace(/\$\(function\(\)\{/g, wx_content);
+            fs.writeFile(htmlTarget,newhtml,function(error){
+                if(error){
+                    console.log(error);
+                    return false;
+                }
+                console.log('写入html成功');
+            });
+        });
+        alert("微信分享设置成功");
+    }
+    /* ======================================h5 app分享设置函数===================================== */
+    function appShare(appcontent){
+        var htmltext;
+        //仓库文件操作
+        fs.readFile(htmlTarget, function (err, data) {
+            if (err) {
+                return console.error(err);
+            }
+            htmltext = data.toString();
+            var app_content = `@include('www.layouts.analysis', ['isMobile'=>'true'])
+<?php $linktext = array(
+    'title'=>${appcontent.apptitle},
+    'desc'=>${appcontent.appcontent},
+);?>
+@include('www.mpappshare.mpappshare',['linkInfo'=> ${appcontent.appurl},'linktext'=>$linktext,'onlyWx'=>false])`
+            //匹配函数
+            let newhtml = htmltext.replace(/\@include\('www.layouts.analysis', \['isMobile'=>'true'\]\)/g, app_content);
+            fs.writeFile(htmlTarget,newhtml,function(error){
+                if(error){
+                    console.log(error);
+                    return false;
+                }
+                console.log('写入html成功');
+            });
+        });
+        alert("app分享设置成功")
+    }
+/* ======================================h5页面插入banner及div及alert===================================== */
+function operationH5(operationdiv){
+    var rbody = operationdiv;
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = rbody.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    let htmltext;
+    //插入标题
+    let title = `<title>${getUrlParam('input_title')}</title>
+    <link rel="stylesheet" href="//static.hexindai.com/lv2/mp.css/${reqtexth5}.css"/>`;
+    let key = `<meta name='keywords' content='${getUrlParam("input_key")}'>`;
+    //本地模板操作
+    fs.readFile(htmlTarget, function (err, data) {
+        if (err) {
+            return console.error(err);
+        }
+        htmltext = data.toString();
+        //匹配dom节点
+        let newhtml = htmltext.replace(/<title>.+<\/title>/g, title);
+        let nuwkey = newhtml.replace(/<meta name="keywords" content=.+>/g, key);
+        let newdom= `${getUrlParam("div_html")}
+@include('www.layouts.analysis', ['isMobile'=>'true'])`;
+        let addhtml = nuwkey.replace(/@include\('www.layouts.analysis', \['isMobile'=>'true'\]\)/g, newdom);
+        fs.writeFile(htmlTarget,addhtml,function(error){
+            if(error){
+                console.log(error);
+                return false;
+            }
+            console.log('写入html成功');
+        });
+    });
+    //css样式追加
+    let div_num= getUrlParam("div_num");
+    let alert_num= getUrlParam("alert_num");
+    let divCssStyle = ``;
+    //添加div样式
+    for(let i =1;i<=div_num;i++){
+        let bgimg = getUrlParam("div"+i+"_bgimg");
+        let width = getUrlParam("div"+i+"_width");
+        let height = getUrlParam("div"+i+"_height");
+        let divtextContent = `
+.${reqtexth5} .establish${i}{
+    width: ${width}px;
+    height: ${height}px;
+    margin: 0 auto;
+    padding: 10px;
+    background: url(//static.hexindai.com/lv2/mp.img/${reqtexth5}/${bgimg}) no-repeat 50%;
+    position: relative;
+}`;
+        divCssStyle+=divtextContent;
+    }
+    //添加alert样式
+    for(let i =1;i<=alert_num;i++){
+        let bgimg = getUrlParam("alert"+i+"_bgimg");
+        let width = getUrlParam("alert"+i+"_width");
+        let height = getUrlParam("alert"+i+"_height");
+        let alertContent = `      
+.${reqtexth5} .alert${i}{
+    width: ${width}px;
+    height: ${height}px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:${width/2}px;
+    margin-top:${height/2}px;
+    padding: 10px;
+    background: url(//static.hexindai.com/lv2/mp.img/${reqtexth5}/${bgimg}) no-repeat 50%;
+    z-index:999;
+}`;
+        divCssStyle+=alertContent;
+    }
+
+    let newcss =`
+.${reqtexth5}{
+    background:${getUrlParam("input_bgcolor")};
+}
+.${reqtexth5} .banner{
+    width: 100%;
+    height: ${getUrlParam("banner_height")}px;
+    background: url(//static.hexindai.com/lv2/mp.img/${reqtexth5}/${getUrlParam("banner_name")}) no-repeat 50%;
+    position: relative;
+}`;
+    divCssStyle+=newcss;
+    fs.appendFile(cssTarget,divCssStyle,function(error){
+        if(error){
+            console.log(error);
+            return false;
+        }
+        console.log('追加css成功');
+    });
+    var h5Window = null;
+    h5Window = new BrowserWindow ({show: true})
+    h5Window.maximize()
+    h5Window.webContents.openDevTools();
+    h5Window.loadURL(`file://${__dirname}/h5view.html?page=${reqtexth5}`);
+    h5Window.on("close", function(){
+        h5Window = null;
+    })
+}
+
+/* ====================================================pc部分=================================================== */
+//pc图片目录
+var pcimgpath;
+//pc端新建页面请求
+$(".creat_special").on('click',function () {
+    $(".pc_content").show();
+    $(".h5_content").hide();
+    h5page = $(".input_text").val();
+    if(h5page === ""){
+        alert("请输入专题名称")
+    }else {
+$(".fictitious_tree_pc").append(`<div class='${h5page}'>
+    <div class='banner'></div>
+    <div class="establish1"></div>
+    <div class="alert_dark">
+        <div class="alert1"></div>
+    </div>
+</div>`);
+        createPcpage(h5page)
+    }
+});
+//pc端创建模板文件及css，img,html文件
+function createPcpage(valtext){
+    //读取输入文件名
+    reqtext = valtext;
+    //html模板文件名
+    let htmlurl = `${__dirname}/tmp/input.html`;
+    //css模板名
+    let cssurl = `${__dirname}/tmp/input.css`;
+    //html模板文件内容
+    let htmltext;
+    //html模板文件内容
+    let csstext;
+    //生成html文件名
+    htmlTarget = projectTarget+"/frontend/resources/views/www/promotion_"+reqtext+".blade.php";
+    //生成css文件名
+    cssTarget =  projectTarget+"/src/css/promotion_"+reqtext+".css";
+    //生成js文件目录
+    let jsCatalog =  projectTarget+"/src/js/promotion_"+reqtext;
+    //生成js文件
+    let jsTarget =  projectTarget+"/src/js/promotion_"+reqtext+"/zz_promotion_"+reqtext+".js";
+    //img文件目录
+    let imgTarget =  projectTarget+"/src/img";
+    //service.js添加
+    let service =  projectTarget+"/src/js/service.js";
+    let result;
+//js模板内容
+let Template = `(function($) {
+    var ${reqtext}_data = {nowrap: true};
+    $callbacks['/promotion/${reqtext}'] = function (reload) {
+        ${reqtext}_data = {nowrap: true};
+        if (routerJS.state.userinfo && routerJS.state.userinfo.is_login) {
+            ${reqtext}_data.is_login = true;
+        }
+        $.when($.promiseJSON.load('/promotion/${reqtext}'), $.promiseJSON.load('/userinfo'))
+            .then(function (info, userinfo) {
+                $.extend(${reqtext}_data, info, userinfo);
+                inti_promotion_${reqtext}(${reqtext}_data);
+            });
+    };
+    $callbacks['/promotion/${reqtext}_partial'] = function () {
+        ${reqtext}_data = {nowrap: true};
+        if (routerJS.state.userinfo && routerJS.state.userinfo.is_login) {
+            ${reqtext}_data.is_login = true;
+        }
+        $.when($.promiseJSON.load('/promotion/${reqtext}'), $.promiseJSON.load('/userinfo'))
+            .then(function (info, userinfo) {
+                $.extend(${reqtext}_data, info, userinfo);
+                inti_promotion_${reqtext}(${reqtext}_data);
+            });
+    };
+    function inti_promotion_${reqtext}(${reqtext}_data) {
+        var promotion_${reqtext}_wrap = nunjucks.render('promotion_${reqtext}.tpl', ${reqtext}_data);
+        $(function() {
+            $('#wrap').html(promotion_${reqtext}_wrap);
+            bind_promotion_${reqtext}(${reqtext}_data);
+        });
+        return false;
+    }
+    function bind_promotion_${reqtext}(${reqtext}_data) {
+        $('#wrap .pushstate').pushstate();
+        $('#wrap .login-btn').on('click', function (e) {
+            e.preventDefault();
+            $.hx.show_login_layer();
+        });
+        //页面js区
+        NProgress && NProgress.done();
+    }
+})(jQuery);`;
+let servicetext = `.set('/promotion/${reqtext}', {
+    'js': {
+        path: 'promotion_${reqtext}.js',
+        require: ['common','swiper']
+    },
+    'css': ['promotion_${reqtext}.css','swiper-3.4.2.min.css'],
+    isStatic:true
+})
+.run();`;
+    //html读写
+    fs.open(htmlurl, 'r+', function(err,fd) {
+        if (err) {
+            return console.error(err);
+        }
+        //读取模板文件
+        fs.readFile(htmlurl, function (err, data) {
+            if (err) {
+                return console.error(err);
+            }
+            htmltext = data.toString();
+            fs.writeFile(htmlTarget,htmltext,function(error){
+                if(error){
+                    console.log(error);
+                    return false;
+                }
+                console.log('写入html成功');
+            });
+        });
+        fs.close(fd, function(err){
+            if (err){
+                console.log(err);
+            }
+            console.log("html文件关闭成功");
+        });
+    });
+    //css读写
+    fs.open(cssurl, 'r+', function(err,fd) {
+        if (err) {
+            return console.error(err);
+        }
+        //读取模板文件
+        fs.readFile(cssurl, function (err, data) {
+            if (err) {
+                return console.error(err);
+            }
+            csstext = data.toString();
+            fs.writeFile(cssTarget,csstext,function(error){
+                if(error){
+                    console.log(error);
+                    return false;
+                }
+                console.log('写入css成功');
+            });
+        });
+        fs.close(fd, function(err){
+            if (err){
+                console.log(err);
+            }
+            console.log("css文件关闭成功");
+        });
+    });
+    //创建js文件
+    fs.mkdir(jsCatalog,function(err){
+        if (err) {
+            return console.error(err);
+        }
+        console.log("js目录创建成功。");
+        fs.writeFile(jsTarget,Template,function(error){
+            if(error){
+                console.log(error);
+                return false;
+            }
+            console.log('写入js成功');
+        });
+    });
+    //创建img文件
+    fs.mkdir(imgTarget+"/"+reqtext,function(err){
+        if (err) {
+            return console.error(err);
+        }
+        pcimgpath = imgTarget+"/"+reqtext;
+        console.log("img目录创建成功。");
+    });
+    //service.js读写
+    fs.open(service, 'r+', function(err,fd) {
+        if (err) {
+            return console.error(err);
+        }
+        //读取模板文件
+        fs.readFile(service, function (err, data) {
+            if (err) {
+                return console.error(err);
+            }
+            servicedata = data.toString();
+            result = servicedata.replace(/.run\(\)\;/g, servicetext);
+            fs.writeFile(service,result,function(error){
+                if(error){
+                    console.log(error);
+                    return false;
+                }
+                console.log('写入service成功');
+            });
+        });
+        fs.close(fd, function(err){
+            if (err){
+                console.log(err);
+            }
+            console.log("service文件关闭成功");
+        });
+    });
+    $(".project_target").hide();
+    $(".creat").hide();
+    $(".dark_alert").hide();
+};
+//图片重命名按钮
+$(".chang_btn_pc").click(function() {
+    var imgname = $(".input_img_pc").val();
+    if(imgname == ''){
+        alert("不能为空");
+    }else{
+        renameImgPc(imgname);
+    }
+})
+//图片重命名函数
+function renameImgPc(imgname){
+    //读取输入文件名
+    let reqtextimg = imgname;
+    fs.readdir(pcimgpath, function(err, files) {
+        if(files.length === 0){
+            console.log("修改失败")
+        }else {
+            files.forEach(function(filename,index) {
+                //运用正则表达式替换oldPath中不想要的部分
+                let oldPath = pcimgpath + '/' + filename,
+                    newPath = pcimgpath + '/' + filename.replace(/.+(?=\.jpg)|.+(?=\.png)/g, reqtextimg+index);
+                fs.rename(oldPath, newPath, function(err) {
+                    if (!err) {
+                        console.log(filename + '替换成功!')
+                    }
+                })
+            });
+            
+        }
+    });
+}
+//插入banner、div、alert
+$("#pc_submit").on('submit', function(){
+    var title = $(".input_title_pc").val();
+    var key = $(".input_key_pc").val();
+    var color = $(".input_bgcolor_pc").val();
+    var height = $(".banner_height_pc").val()
+    var name = $(".banner_name_pc").val();
+    var $form = $("#pc_submit").serialize();
+    let div_html = ``;
+    div_html = $(".fictitious_tree_pc").html().toString();
+    $form+= "&div_html="+div_html;
+    var operationcontent = "&"+$form;
+    if(title !=="" && key !=="" && color !=="" && height !== "" && name !==""){
+        operationPc(operationcontent);
+    }else {
+        alert("字段不能为空");
+    }
+    return false;
+})
+//pc插入banner、div、alert函数
+function operationPc(operationcontent){
+    let rbody = operationcontent;
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = rbody.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    //html模板文件名
+    let htmlurl = './tmp/input.html';
+    //css模板名
+    let cssurl = './tmp/input.css';
+    let htmltext;
+    //标题
+    let title = `('title', '${getUrlParam('input_title')}')`;
+    let key = `('keywords', '${getUrlParam("input_key")}')`;
+    //本地模板操作
+    fs.readFile(htmlTarget, function (err, data) {
+        if (err) {
+            return console.error(err);
+        }
+        htmltext = data.toString();
+        //匹配dom节点
+        let newhtml = htmltext.replace(/\('title', '.+'\)/g, title);
+        let nuwkey = newhtml.replace(/\('keywords', '.+'\)/g, key);
+        let newdom= `@section('content')
+${getUrlParam("div_html")}`;
+        let addhtml = nuwkey.replace(/@section\('content'\)/g, newdom);
+        fs.writeFile(htmlTarget,addhtml,function(error){
+            if(error){
+                console.log(error);
+                return false;
+            }
+            console.log('写入html成功');
+        });
+    });
+    //css样式追加
+    let div_num= `${getUrlParam("div_num")}`;
+    let alert_num= `${getUrlParam("alert_num")}`;
+    let divCssStyle = ``;
+//添加div样式
+for(let i =1;i<=div_num;i++){
+    let bgimg = getUrlParam("div"+i+"_bgimg");
+    let width = getUrlParam("div"+i+"_width");
+    let height = getUrlParam("div"+i+"_height");
+let divtextContent = `
+.${reqtext} .establish${i}{
+    width: ${width}px;
+    height: ${height}px;
+    margin: 0 auto;
+    padding: 10px;
+    background: url(//static.hexindai.com/lv2/img/${reqtext}/${bgimg}) no-repeat 50%;
+    position: relative;
+}`;
+    divCssStyle+=divtextContent;
+}
+//添加alert样式
+for(let i =1;i<=alert_num;i++){
+        let bgimg = getUrlParam("alert"+i+"_bgimg");
+        let width = getUrlParam("alert"+i+"_width");
+        let height = getUrlParam("alert"+i+"_height");
+        let alertContent = `
+.${reqtext} .alert_dark${i}{
+    width:100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    background:rgba(000,000,000,.8);
+    display:none;
+}        
+.${reqtext} .alert${i}{
+    width: ${width}px;
+    height: ${height}px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:${width/2}px;
+    margin-top:${height/2}px;
+    padding: 10px;
+    background: url(//static.hexindai.com/lv2/img/${reqtext}/${bgimg}) no-repeat 50%;
+    z-index:999;
+}`;
+        divCssStyle+=alertContent;
+}
+let newcss =`
+.${reqtext}{
+    background:${getUrlParam("input_bgcolor")};
+}
+.${reqtext} .banner{
+    width: 100%;
+    height: ${getUrlParam("banner_height")}px;
+    background: url(//static.hexindai.com/lv2/img/${reqtext}/${getUrlParam("banner_name")}) no-repeat 50%;
+    position: relative;
+}`;
+    divCssStyle+=newcss;
+        fs.appendFile(cssTarget,divCssStyle,function(error){
+            if(error){
+                console.log(error);
+                return false;
+            }
+            console.log('追加css成功');
+        });
+    alert("新建成功")
+};
+/*==================================公用添加div===========================================*/
+let divnum = 1;
+$("#div_num").val(divnum);
+$(".divadd").on('click',function () {
+    divnum++;
+    $(".creatdiv").append(`<label>div${divnum}：</label>
+        <input type="text" name="div${divnum}_width" placeholder="div宽度" value=""><br>
+        <input type="text" name="div${divnum}_height" placeholder="div高度" value=""><br>
+        <input type="text" name="div${divnum}_bgimg" placeholder="div背景图片" value=""><br>`);
+    $(".alert_dark").before(`<div class="establish${divnum}"></div>`);
+    $("#div_num").val(divnum);
+    $("#div_num_pc").val(divnum);
+});
+//公用添加alert
+let alertnum = 1;
+let valtext;
+$("#alert_num").val(alertnum);
+$(".alertadd").on('click',function () {
+    alertnum++;
+    $(".alert_div").append(`<label>alert${alertnum}：</label>
+        <input type="text" name="alert${alertnum}_width" placeholder="alert宽度" value=""><br>
+        <input type="text" name="alert${alertnum}_height" placeholder="alert高度" value=""><br>
+        <input type="text" name="alert${alertnum}_bgimg" placeholder="alert背景图片" value=""><br>`);
+    $(`.${h5page} .alert_dark`).append(`<div class="alert${alertnum}"></div>`);
+    $("#alert_num").val(alertnum);
+    $("#alert_num_pc").val(alertnum);
+});
+//pc,h5选项卡切换
+$(".pcclick").on('click',function () {
+    $(this).addClass("active").siblings().removeClass("active");
+    $(".pcdiv").show();
+    $(".h5div").hide();
+})
+$(".h5click").on('click',function () {
+    $(this).addClass("active").siblings().removeClass("active");
+    $(".pcdiv").hide();
+    $(".h5div").show();
+    $(".img_btn").addClass("h5img_btn").removeClass("chang_btn");
+    $(".form_btn").attr("id","h5_submit");
+});
+</script>
+</html>
